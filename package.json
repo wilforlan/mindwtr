@@ -1,0 +1,122 @@
+{
+  "name": "mindwtr",
+  "version": "0.1.0",
+  "private": true,
+  "description": "mindwtr — local note app for journaling and thinking",
+  "author": "mindwtr",
+  "main": "./out/main/main.js",
+  "scripts": {
+    "ensure:native": "node scripts/ensure-electron-native.mjs",
+    "dev": "npm run ensure:native && electron-vite dev",
+    "build": "npm run ensure:native && electron-vite build",
+    "preview": "npm run ensure:native && electron-vite preview",
+    "start": "npm run ensure:native && electron .",
+    "typecheck": "tsc --noEmit -p tsconfig.web.json && tsc --noEmit -p tsconfig.node.json",
+    "rebuild:electron": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-rebuild -f -w better-sqlite3",
+    "test": "npm rebuild better-sqlite3 && vitest run; status=$?; npm run rebuild:electron; exit $status",
+    "test:watch": "vitest",
+    "dist:dmg": "npm run build && electron-builder --mac dmg",
+    "dist:dmg:arm64": "npm run build && electron-builder --mac dmg --arm64",
+    "dist:dmg:x64": "npm run build && electron-builder --mac dmg --x64"
+  },
+  "build": {
+    "appId": "computer.mindwtr.app",
+    "productName": "mindwtr",
+    "copyright": "Copyright © mindwtr",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "package.json",
+      "node_modules/**/*",
+      "build/icon.png"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/better-sqlite3/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "build/icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "mac": {
+      "icon": "build/icon.icns",
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ],
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null
+    },
+    "dmg": {
+      "title": "mindwtr ${version}",
+      "icon": "build/icon.icns",
+      "backgroundColor": "#F7EFE6",
+      "contents": [
+        {
+          "x": 140,
+          "y": 180,
+          "type": "file"
+        },
+        {
+          "x": 400,
+          "y": 180,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    }
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-scroll-area": "^1.2.9",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
+    "@tiptap/extension-placeholder": "^2.26.1",
+    "@tiptap/extension-underline": "^2.26.1",
+    "@tiptap/pm": "^2.26.1",
+    "@tiptap/react": "^2.26.1",
+    "@tiptap/starter-kit": "^2.26.1",
+    "@xyflow/react": "^12.8.2",
+    "better-sqlite3": "^11.10.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.525.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.7.2",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.16.5",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "electron": "^37.2.3",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^4.0.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  }
+}

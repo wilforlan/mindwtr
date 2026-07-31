@@ -1,0 +1,12 @@
+node_modules
+out
+dist
+dist-electron
+release
+*.log
+.DS_Store
+coverage
+*.db
+*.db-journal
+.fluent/drafts
+build/icon.iconset

@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-display: "Fraunces", "Iowan Old Style", Palatino, serif;
+  --font-ui: "Source Sans 3", "Segoe UI", sans-serif;
+
+  --color-sand-50: #fffaf5;
+  --color-sand-100: #f7efe6;
+  --color-sand-200: #efdfd0;
+  --color-sand-300: #e2c9b3;
+  --color-peach-400: #e8a87c;
+  --color-amber-500: #c97b3a;
+  --color-ink-700: #3d2f28;
+  --color-ink-900: #2a1f1a;
+  --color-glass: rgb(255 250 245 / 0.72);
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: local("Fraunces"), local("Georgia");
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: local("Source Sans 3"), local("Helvetica Neue"), local("Arial");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--color-ink-900);
+  background:
+    radial-gradient(ellipse 120% 80% at 10% -10%, #ffe8d4 0%, transparent 55%),
+    radial-gradient(ellipse 90% 70% at 100% 0%, #f5d9c0 0%, transparent 50%),
+    linear-gradient(165deg, #fffaf5 0%, #f7efe6 45%, #efdfd0 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass-panel {
+  background: var(--color-glass);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgb(255 255 255 / 0.55);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.65) inset,
+    0 12px 40px rgb(61 47 40 / 0.08);
+}
+
+.onboarding-root {
+  animation: onboarding-fade-in 700ms ease-out both;
+}
+
+.onboarding-brand {
+  animation: onboarding-rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.onboarding-photo {
+  transform: scale(1.04);
+  animation: onboarding-ken-burns 18s ease-in-out infinite alternate;
+}
+
+.onboarding-copy {
+  animation: onboarding-rise 1100ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+.onboarding-enter-forward {
+  animation: onboarding-slide-forward 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.onboarding-enter-back {
+  animation: onboarding-slide-back 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes onboarding-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes onboarding-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes onboarding-slide-forward {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes onboarding-slide-back {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes onboarding-ken-burns {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.1) translate3d(-1.5%, -1%, 0);
+  }
+}
