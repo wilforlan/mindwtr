@@ -9,6 +9,7 @@ import { ItemHubView } from "@/features/items/item-hub-view";
 import { NotesList } from "@/features/notes/notes-list";
 import { OnboardingScreen } from "@/features/onboarding/onboarding-screen";
 import { ProfileSwitcher } from "@/features/profiles/profile-switcher";
+import { shouldAcceptSavedNote } from "@/features/editor/date-scroll";
 import { cn } from "@/lib/utils";
 
 type View = "today" | "notes" | "graph" | "history" | "item";
@@ -230,12 +231,23 @@ export const App = (): React.JSX.Element => {
           <NoteEditor
             note={activeNote}
             profileId={activeProfileId}
-            onChange={async (contentJson) => {
+            onChange={async ({ noteId, contentJson }) => {
               const updated = await window.mindwtr.notes.updateContent(
-                activeNote.id,
+                noteId,
                 contentJson
               );
-              setActiveNote(updated);
+              setActiveNote((current) => {
+                if (
+                  !current ||
+                  !shouldAcceptSavedNote({
+                    activeNoteId: current.id,
+                    savedNoteId: noteId,
+                  })
+                ) {
+                  return current;
+                }
+                return updated;
+              });
             }}
             onWikiLink={async (title) => {
               const result = await window.mindwtr.nodes.createFromWikiLink({
@@ -246,6 +258,20 @@ export const App = (): React.JSX.Element => {
               return result.node;
             }}
             onOpenItem={handleOpenItem}
+            onNavigateDate={
+              activeNote.kind === "daily"
+                ? (date) => {
+                    void (async () => {
+                      const note = await window.mindwtr.notes.getByDate(
+                        activeProfileId,
+                        date
+                      );
+                      setActiveNote(note);
+                      setView("today");
+                    })();
+                  }
+                : undefined
+            }
             onBackToNotes={
               activeNote.kind === "freeform"
                 ? () => {

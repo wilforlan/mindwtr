@@ -1,0 +1,397 @@
+{
+  "areas": [
+    {
+      "color": "#94a3b8",
+      "createdAt": "2026-02-17T14:16:04.138Z",
+      "id": "de4b2285-866f-4608-ad7c-47f53180275a",
+      "name": "Work",
+      "order": 0,
+      "rev": 1,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "updatedAt": "2026-02-17T14:16:04.138Z"
+    }
+  ],
+  "projects": [
+    {
+      "areaId": "de4b2285-866f-4608-ad7c-47f53180275a",
+      "color": "#94a3b8",
+      "createdAt": "2026-02-17T14:15:52.556Z",
+      "id": "6f71ca68-00fd-44b6-9aa3-ffa7c2b996ef",
+      "isFocused": true,
+      "order": 0,
+      "rev": 7,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "reviewAt": "2026-03-17T12:00",
+      "status": "active",
+      "tagIds": [
+        "#healthcare #hr #social"
+      ],
+      "title": "Personal",
+      "updatedAt": "2026-02-17T14:16:51.285Z"
+    }
+  ],
+  "sections": [
+    {
+      "createdAt": "2026-02-17T14:17:07.322Z",
+      "id": "6dc35526-6b82-4120-b885-90d570659939",
+      "order": 0,
+      "projectId": "6f71ca68-00fd-44b6-9aa3-ffa7c2b996ef",
+      "rev": 1,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "title": "Suncture",
+      "updatedAt": "2026-02-17T14:17:07.322Z"
+    },
+    {
+      "createdAt": "2026-02-17T14:17:17.235Z",
+      "id": "8432445c-dd30-4eb8-a9d6-5b7f777d7b21",
+      "order": 1,
+      "projectId": "6f71ca68-00fd-44b6-9aa3-ffa7c2b996ef",
+      "rev": 1,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "title": "Mink",
+      "updatedAt": "2026-02-17T14:17:17.235Z"
+    },
+    {
+      "createdAt": "2026-02-17T14:17:24.971Z",
+      "id": "013bc118-0a33-4d1e-bfd7-98789cbf0e18",
+      "order": 2,
+      "projectId": "6f71ca68-00fd-44b6-9aa3-ffa7c2b996ef",
+      "rev": 1,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "title": "DineHeart",
+      "updatedAt": "2026-02-17T14:17:24.971Z"
+    }
+  ],
+  "settings": {
+    "attachments": {
+      "lastCleanupAt": "2026-03-11T16:01:09.833Z"
+    },
+    "dailyDigestEveningEnabled": true,
+    "dailyDigestMorningEnabled": true,
+    "deviceId": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+    "features": {
+      "pomodoro": true,
+      "priorities": true
+    },
+    "filters": {
+      "areaId": "__all__"
+    },
+    "gtd": {
+      "autoArchiveDays": 3,
+      "taskEditor": {
+        "defaultsVersion": 3,
+        "hidden": []
+      }
+    },
+    "lastSyncAt": "2026-03-12T10:26:05.533Z",
+    "lastSyncHistory": [
+      {
+        "at": "2026-03-12T10:26:05.533Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-03-11T16:01:09.683Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-28T19:54:10.900Z",
+        "conflictIds": [
+          "4828adc2-0c7a-4c65-aecd-327f845bed38"
+        ],
+        "conflicts": 1,
+        "maxClockSkewMs": 524395015,
+        "status": "conflict",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-28T19:54:05.723Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-23T11:47:03.953Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-22T18:14:14.771Z",
+        "conflictIds": [
+          "4828adc2-0c7a-4c65-aecd-327f845bed38"
+        ],
+        "conflicts": 1,
+        "maxClockSkewMs": 94294867,
+        "status": "conflict",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-22T18:14:04.778Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-22T18:10:54.677Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-21T17:52:31.708Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-21T16:02:58.855Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-21T16:02:41.013Z",
+        "conflictIds": [
+          "4828adc2-0c7a-4c65-aecd-327f845bed38"
+        ],
+        "conflicts": 1,
+        "maxClockSkewMs": 39341,
+        "status": "conflict",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-21T16:01:09.707Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-18T18:49:35.241Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-18T15:02:30.746Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-18T14:46:20.113Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-18T14:46:13.326Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-17T17:41:15.700Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-17T15:48:29.607Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-17T14:23:56.464Z",
+        "conflictIds": [],
+        "conflicts": 0,
+        "maxClockSkewMs": 0,
+        "status": "success",
+        "timestampAdjustments": 0
+      },
+      {
+        "at": "2026-02-17T14:23:39.234Z",
+        "conflictIds": [
+          "2da110cd-752f-4389-b5c9-55c9a6a2f601"
+        ],
+        "conflicts": 1,
+        "maxClockSkewMs": 41350,
+        "status": "conflict",
+        "timestampAdjustments": 0
+      }
+    ],
+    "lastSyncStats": {
+      "areas": {
+        "conflictIds": [],
+        "conflicts": 0,
+        "deletionsWon": 0,
+        "incomingOnly": 0,
+        "incomingTotal": 1,
+        "localOnly": 0,
+        "localTotal": 1,
+        "maxClockSkewMs": 0,
+        "mergedTotal": 1,
+        "resolvedUsingIncoming": 1,
+        "resolvedUsingLocal": 0,
+        "timestampAdjustmentIds": [],
+        "timestampAdjustments": 0
+      },
+      "projects": {
+        "conflictIds": [],
+        "conflicts": 0,
+        "deletionsWon": 0,
+        "incomingOnly": 0,
+        "incomingTotal": 1,
+        "localOnly": 0,
+        "localTotal": 1,
+        "maxClockSkewMs": 0,
+        "mergedTotal": 1,
+        "resolvedUsingIncoming": 1,
+        "resolvedUsingLocal": 0,
+        "timestampAdjustmentIds": [],
+        "timestampAdjustments": 0
+      },
+      "sections": {
+        "conflictIds": [],
+        "conflicts": 0,
+        "deletionsWon": 0,
+        "incomingOnly": 0,
+        "incomingTotal": 3,
+        "localOnly": 0,
+        "localTotal": 3,
+        "maxClockSkewMs": 0,
+        "mergedTotal": 3,
+        "resolvedUsingIncoming": 3,
+        "resolvedUsingLocal": 0,
+        "timestampAdjustmentIds": [],
+        "timestampAdjustments": 0
+      },
+      "tasks": {
+        "conflictIds": [],
+        "conflicts": 0,
+        "deletionsWon": 0,
+        "incomingOnly": 0,
+        "incomingTotal": 3,
+        "localOnly": 0,
+        "localTotal": 3,
+        "maxClockSkewMs": 0,
+        "mergedTotal": 3,
+        "resolvedUsingIncoming": 3,
+        "resolvedUsingLocal": 0,
+        "timestampAdjustmentIds": [],
+        "timestampAdjustments": 0
+      }
+    },
+    "lastSyncStatus": "success",
+    "migrations": {
+      "lastAutoArchiveAt": "2026-03-11T16:01:09.876Z",
+      "lastTombstoneCleanupAt": "2026-03-11T16:01:09.876Z",
+      "version": 1
+    },
+    "syncPreferences": {},
+    "syncPreferencesUpdatedAt": {
+      "ai": "2026-02-17T07:54:10.819Z",
+      "appearance": "2026-02-17T09:17:44.734Z"
+    },
+    "taskSortBy": "due",
+    "weeklyReviewEnabled": true
+  },
+  "tasks": [
+    {
+      "contexts": [
+        "@work",
+        "@phone"
+      ],
+      "createdAt": "2026-02-17T09:13:38.886Z",
+      "description": "Nudge him to respond to the email; stay friendly and let him know he should let you know if he needs additional information.",
+      "id": "a47930cd-4012-4f13-8691-037695713121",
+      "pushCount": 0,
+      "rev": 7,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "status": "reference",
+      "tags": [
+        "#lowenergy"
+      ],
+      "taskMode": "task",
+      "title": "Reach out to Vic about suncture cto role agreement review",
+      "updatedAt": "2026-02-17T09:18:02.725Z"
+    },
+    {
+      "contexts": [
+        "@work"
+      ],
+      "createdAt": "2026-02-17T14:19:13.848Z",
+      "description": "Checkout her email again and understand her requirements",
+      "dueDate": "2026-02-28",
+      "id": "2da110cd-752f-4389-b5c9-55c9a6a2f601",
+      "orderNum": 0,
+      "priority": "medium",
+      "projectId": "6f71ca68-00fd-44b6-9aa3-ffa7c2b996ef",
+      "pushCount": 0,
+      "rev": 7,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "sectionId": "8432445c-dd30-4eb8-a9d6-5b7f777d7b21",
+      "startTime": "2026-02-27",
+      "status": "inbox",
+      "tags": [
+        "#focused"
+      ],
+      "taskMode": "task",
+      "timeEstimate": "3hr",
+      "title": "Prepare new document for Vara about mink partnership due /due:27/02/2026",
+      "updatedAt": "2026-02-17T14:23:34.215Z"
+    },
+    {
+      "areaId": "de4b2285-866f-4608-ad7c-47f53180275a",
+      "completedAt": "2026-02-22T18:14:10.860Z",
+      "contexts": [],
+      "createdAt": "2026-02-21T16:01:56.652Z",
+      "dueDate": "2026-02-21T22:00",
+      "id": "4828adc2-0c7a-4c65-aecd-327f845bed38",
+      "isFocusedToday": false,
+      "pushCount": 0,
+      "rev": 4,
+      "revBy": "d3457b65-e6b3-46ee-89b8-5776436a051c",
+      "startTime": "2026-02-21T17:05",
+      "status": "archived",
+      "tags": [],
+      "taskMode": "task",
+      "title": "Rails by DH - Building AI Apps",
+      "updatedAt": "2026-02-28T19:54:05.875Z"
+    }
+  ]
+}

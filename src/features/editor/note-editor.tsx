@@ -18,6 +18,16 @@ import { useCallback, useEffect, useRef } from "react";
 import type { GraphNode, Note } from "@shared/types";
 import { collectWikiTitlesFromContent } from "@shared/wiki-link";
 import { Button } from "@/components/ui/button";
+import {
+  DATE_SCROLL_COOLDOWN_MS,
+  DATE_SCROLL_THRESHOLD_PX,
+  dateScrollRestorePosition,
+  isScrollAtBottom,
+  isScrollAtTop,
+  resolveDateScrollNavigation,
+  shiftDailyDate,
+  type DateScrollRestorePosition,
+} from "./date-scroll";
 import { Subheading } from "./subheading";
 import {
   WikiSuggestionMenu,
@@ -28,9 +38,13 @@ import { WikiLink } from "./wiki-link";
 type NoteEditorProps = {
   note: Note;
   profileId: string;
-  onChange: (contentJson: string) => Promise<void>;
+  onChange: (options: {
+    noteId: string;
+    contentJson: string;
+  }) => Promise<void>;
   onWikiLink: (title: string) => Promise<GraphNode>;
   onOpenItem: (title: string) => void;
+  onNavigateDate?: (date: string) => void;
   onBackToNotes?: () => void;
 };
 
@@ -40,14 +54,25 @@ export const NoteEditor = ({
   onChange,
   onWikiLink,
   onOpenItem,
+  onNavigateDate,
   onBackToNotes,
 }: NoteEditorProps): React.JSX.Element => {
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const versionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const noteIdRef = useRef(note.id);
+  const onChangeRef = useRef(onChange);
   const onWikiLinkRef = useRef(onWikiLink);
   const onOpenItemRef = useRef(onOpenItem);
+  const onNavigateDateRef = useRef(onNavigateDate);
   const syncedTitlesRef = useRef<Set<string>>(new Set());
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const overscrollDeltaRef = useRef(0);
+  const dateScrollCooldownUntilRef = useRef(0);
+  const pendingRestoreRef = useRef<DateScrollRestorePosition | null>(null);
+
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
 
   useEffect(() => {
     onWikiLinkRef.current = onWikiLink;
@@ -56,6 +81,10 @@ export const NoteEditor = ({
   useEffect(() => {
     onOpenItemRef.current = onOpenItem;
   }, [onOpenItem]);
+
+  useEffect(() => {
+    onNavigateDateRef.current = onNavigateDate;
+  }, [onNavigateDate]);
 
   const editor = useEditor({
     extensions: [
@@ -112,7 +141,10 @@ export const NoteEditor = ({
         clearTimeout(saveTimer.current);
       }
       saveTimer.current = setTimeout(() => {
-        void onChange(json);
+        void onChangeRef.current({
+          noteId: noteIdRef.current,
+          contentJson: json,
+        });
       }, 500);
 
       if (versionTimer.current) {
@@ -124,8 +156,23 @@ export const NoteEditor = ({
     },
   });
 
+  const flushPendingSave = useCallback((): void => {
+    if (saveTimer.current) {
+      clearTimeout(saveTimer.current);
+      saveTimer.current = null;
+    }
+    if (!editor) {
+      return;
+    }
+    void onChangeRef.current({
+      noteId: noteIdRef.current,
+      contentJson: JSON.stringify(editor.getJSON()),
+    });
+  }, [editor]);
+
   useEffect(() => {
     noteIdRef.current = note.id;
+    overscrollDeltaRef.current = 0;
     syncedTitlesRef.current = new Set(
       collectWikiTitlesFromContent(note.contentJson).map((title) =>
         title.toLowerCase()
@@ -141,6 +188,22 @@ export const NoteEditor = ({
   }, [editor, note.contentJson, note.id]);
 
   useEffect(() => {
+    const container = scrollContainerRef.current;
+    const restore = pendingRestoreRef.current;
+    if (!container || !restore) {
+      return;
+    }
+    pendingRestoreRef.current = null;
+    requestAnimationFrame(() => {
+      if (restore === "top") {
+        container.scrollTop = 0;
+        return;
+      }
+      container.scrollTop = container.scrollHeight;
+    });
+  }, [note.id]);
+
+  useEffect(() => {
     return () => {
       if (saveTimer.current) {
         clearTimeout(saveTimer.current);
@@ -150,6 +213,64 @@ export const NoteEditor = ({
       }
     };
   }, []);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || note.kind !== "daily" || !note.date) {
+      return;
+    }
+
+    const noteDate = note.date;
+
+    const onWheel = (event: WheelEvent): void => {
+      const navigateDate = onNavigateDateRef.current;
+      if (!navigateDate || Date.now() < dateScrollCooldownUntilRef.current) {
+        return;
+      }
+
+      const edgeState = {
+        scrollTop: container.scrollTop,
+        scrollHeight: container.scrollHeight,
+        clientHeight: container.clientHeight,
+      };
+      const result = resolveDateScrollNavigation({
+        deltaY: event.deltaY,
+        atTop: isScrollAtTop(edgeState),
+        atBottom: isScrollAtBottom(edgeState),
+        accumulatedDelta: overscrollDeltaRef.current,
+        thresholdPx: DATE_SCROLL_THRESHOLD_PX,
+        enabled: true,
+      });
+
+      if (result.kind === "none") {
+        overscrollDeltaRef.current = 0;
+        return;
+      }
+
+      event.preventDefault();
+      overscrollDeltaRef.current = result.accumulatedDelta;
+
+      if (result.kind === "accumulate") {
+        return;
+      }
+
+      overscrollDeltaRef.current = 0;
+      dateScrollCooldownUntilRef.current = Date.now() + DATE_SCROLL_COOLDOWN_MS;
+      pendingRestoreRef.current = dateScrollRestorePosition(result.direction);
+      flushPendingSave();
+      navigateDate(
+        shiftDailyDate({
+          date: noteDate,
+          direction: result.direction,
+        })
+      );
+    };
+
+    container.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      container.removeEventListener("wheel", onWheel);
+    };
+  }, [flushPendingSave, note.date, note.id, note.kind]);
 
   const applySuggestion = useCallback(
     (choice: WikiSuggestionChoice) => {
@@ -269,7 +390,10 @@ export const NoteEditor = ({
           </Button>
         </div>
       </header>
-      <div className="relative flex-1 overflow-auto bg-gradient-to-b from-sand-50/40 to-transparent">
+      <div
+        ref={scrollContainerRef}
+        className="relative flex-1 overflow-auto bg-gradient-to-b from-sand-50/40 to-transparent"
+      >
         <div className="mx-auto min-h-full max-w-3xl">
           <EditorContent editor={editor} />
         </div>
